@@ -54,6 +54,12 @@ export const get_home_page_data = async() => {
 export const get_movies_by_page = async(page = 1) => {
     const res = await fetch(`${popularMovieApi}&page=${page}`)
 
-    if(!res.ok) throw new Error("Failed to fetch Movies!");
+    if(!res.ok) throw new Error("Failed to fetch Popular Movies!");
     return res.json();
+}
+
+export const get_serie_by_page = async (page = 1) => {
+    const res = await fetch(`${popularTVserieApi}&page=${page}`)
+    if(!res.ok) throw new Error("Failed to fetch Popular Series");
+    return res.json()
 }

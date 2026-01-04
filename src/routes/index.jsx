@@ -4,7 +4,7 @@ import Movies from '../pages/Movies'
 import Series from '../pages/Series'
 import ContactUs from '../pages/ContactUs'
 import Home from "../pages/Home";
-import {home_page_loader ,movie_loader } from "./loader";
+import {home_page_loader ,movie_loader, serie_loader } from "./loader";
 
 
 export const router = createBrowserRouter([
@@ -27,7 +27,8 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'series',
-                element: <Series />
+                element: <Series />,
+                loader: serie_loader
             },
             {
                 path: 'contact-us',
