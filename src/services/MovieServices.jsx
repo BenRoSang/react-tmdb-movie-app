@@ -10,7 +10,7 @@ const genresSerieApi = `https://api.themoviedb.org/3/genre/tv/list?language=en&a
 const genresMovieCountApi = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&api_key=${token}&with_genres=`;
 const genresSerieCountApi = `https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=1&sort_by=popularity.desc&api_key=${token}&with_genres=`;
 
-const get_home_page_data = async() => {
+export const get_home_page_data = async() => {
     // const res = await fetch(popularMovieApi)
     // return res.json()
     const [popularMovies, trendingMovies, popularTVSeries, trendingTVSeries, genresMovie, genresSerie] = await Promise.all([
@@ -50,4 +50,10 @@ const get_home_page_data = async() => {
     }
 }
 
-export default get_home_page_data
+
+export const get_movies_by_page = async(page = 1) => {
+    const res = await fetch(`${popularMovieApi}&page=${page}`)
+
+    if(!res.ok) throw new Error("Failed to fetch Movies!");
+    return res.json();
+}

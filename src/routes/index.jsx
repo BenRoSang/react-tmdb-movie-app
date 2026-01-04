@@ -4,7 +4,8 @@ import Movies from '../pages/Movies'
 import Series from '../pages/Series'
 import ContactUs from '../pages/ContactUs'
 import Home from "../pages/Home";
-import get_home_page_data from "../services/MovieServices";
+import {home_page_loader ,movie_loader } from "./loader";
+
 
 export const router = createBrowserRouter([
     {
@@ -15,16 +16,14 @@ export const router = createBrowserRouter([
                 index: true,
                 element: <Home />,
                 // loader: get_popular_movie()
-                loader: async () => {
-                    // return data from here
-                    return { homePageData: await get_home_page_data() };
-                },
+                loader: home_page_loader,
               
                 
             },
             {
                 path: 'movies',
-                element: <Movies />
+                element: <Movies />,
+                loader: movie_loader,
             },
             {
                 path: 'series',
