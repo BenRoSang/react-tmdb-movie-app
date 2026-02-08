@@ -1,14 +1,21 @@
 import React from 'react'
+import { useNavigate } from 'react-router'
+
 
 function HomeMovieCard({movie}) {
+    const navigate = useNavigate();
+    const handleDetail = (id) => {
+        console.log('handleDetail', id)
+        navigate(`/detail/${id}`)
+    }
   return (
     // step one
-    <div className='group cursor-pointer w-full max-w-[200px]'>
+    <div onClick={() => handleDetail(movie.id)} className='group cursor-pointer w-full max-w-[200px]'>
         {/* step two Image container */}
         <div className='relative aspect-[2/3] overflow-hidden bg-slate-800 rounded-xl border border-slate-700/50 shadow-md transition-all duration-300 group-hover:shadow-blue-500/20 group-hover:border-blue-500/50'>
             {/* step three The Image */}
             <img 
-                src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
+                src={movie.backdrop_path ? `https://image.tmdb.org/t/p/w500${movie.backdrop_path}` : `https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 alt={movie.name} 
                 loading="lazy" 
                 className='w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110'
@@ -31,7 +38,7 @@ function HomeMovieCard({movie}) {
                     { movie.release_date || movie.first_air_date }
                 </span>
                 <span className="flex items-center gap-1">
-                    <span className="text-yellow-500">★</span> {movie.vote_average.toFixed(1)}
+                    <span className="text-yellow-500">★</span> {movie.vote_average ? movie.vote_average.toFixed(1) : ''}
                 </span>
             </div>
         </div>

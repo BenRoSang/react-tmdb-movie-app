@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router';
+import { Link, NavLink, useNavigate } from 'react-router';
 
 
 const navItems = [
@@ -11,7 +11,14 @@ const navItems = [
 ]
 
 const Navbar = () => {
-  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate()
+
+  const handleEnter = (e) => {
+    if(e.key === 'Enter' && query != '') {
+      navigate(`/search?query=${encodeURIComponent(query.trim())}`)
+    }
+  }
 
   return (
     <nav className="bg-slate-900 container mx-auto text-white px-8 py-4 flex items-center justify-between sticky top-0 z-50 shadow-lg">
@@ -53,8 +60,9 @@ const Navbar = () => {
           <input
             type="text"
             placeholder="Search movies..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => handleEnter(e)}
             className="bg-slate-800 text-sm rounded-full py-2 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-slate-700 transition-all w-40 md:w-64"
           />
           {/* <button 

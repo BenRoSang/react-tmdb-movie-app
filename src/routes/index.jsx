@@ -4,7 +4,10 @@ import Movies from '../pages/Movies'
 import Series from '../pages/Series'
 import ContactUs from '../pages/ContactUs'
 import Home from "../pages/Home";
-import {home_page_loader ,movie_loader, serie_loader } from "./loader";
+import {home_page_loader ,movie_loader, serie_loader, search_loader, detail_loader } from "./loader";
+import { contactAction } from "./action";
+import Search from "../pages/Search";
+import Detail from "../pages/Detail";
 
 
 export const router = createBrowserRouter([
@@ -16,9 +19,7 @@ export const router = createBrowserRouter([
                 index: true,
                 element: <Home />,
                 // loader: get_popular_movie()
-                loader: home_page_loader,
-              
-                
+                loader: home_page_loader,                
             },
             {
                 path: 'movies',
@@ -32,7 +33,19 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'contact-us',
-                element: <ContactUs />
+                element: <ContactUs />,
+                action: contactAction
+            },
+            {
+                path: 'search',
+                element: <Search />,
+                loader: search_loader
+            },
+            {
+                path: 'detail/:id',
+                element: <Detail />,
+                loader: ({params}) => detail_loader(params.id)
+
             }
 
         ]

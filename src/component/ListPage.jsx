@@ -10,7 +10,7 @@ function ListPage({currentPage, totalPage, handlePageChange, loaderData, title})
       </div>
       <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5 place-items-center'>
         {
-          loaderData.results.map((movie) => ( <HomeMovieCard key={movie.id} movie={movie} /> ))
+          loaderData.results.map((movie) => ( movie.backdrop_path || movie.poster_path ? <HomeMovieCard key={movie.id} movie={movie} /> : '' ))
         }
       </div>
       <div className='flex justify-center items-center gap-4 py-10'>
